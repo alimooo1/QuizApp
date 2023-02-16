@@ -7,6 +7,11 @@ let questionsList = await getQuestions()
 let currentLevel  = 0
 let answerIndex = null
 
+function decode(str) {
+    let txt = new DOMParser().parseFromString(str, "text/html");
+    return txt.documentElement.textContent;
+    }
+
 const showQuestion = question => {
     const answersNumber = question.incorrect_answers.length
     if(answersNumber === 1) {
@@ -18,29 +23,29 @@ const showQuestion = question => {
     }
     answerIndex = Math.floor(Math.random()*(answersNumber+1))
     let wrongAnswerIndex = 0
-    questionLine.innerHTML = question.question
-    answerBoxes[answerIndex].innerHTML = question.correct_answer
+    questionLine.textContent = decode(question.question)
+    answerBoxes[answerIndex].textContent = decode(question.correct_answer)
     for (let i = 0; i<=answersNumber ; i++) {
         if(i === answerIndex) {
             continue
         } else {
-            answerBoxes[i].innerHTML = question.incorrect_answers[wrongAnswerIndex]
+            answerBoxes[i].textContent = decode(question.incorrect_answers[wrongAnswerIndex])
             wrongAnswerIndex++
         }
     }
 }
 
 const checkAnswerHandler = (event) => {
-    if (event.target.innerHTML === answerBoxes[answerIndex].innerHTML) {
-        results[currentLevel].classList.add("correct-answer")
+    if (event.target.textContent === answerBoxes[answerIndex].textContent) {
+        results[currentLevel].classList.add("correct-answer") 
         results[currentLevel].classList.add("showed-result")
     } else {
         results[currentLevel].classList.add("showed-result")
     }
     currentLevel++
     if (currentLevel === 4) {
-        pageContent.innerHTML = ""
-        questionLine.innerHTML = "The Exam is finished."
+        pageContent.textContent = ""
+        questionLine.textContent = "The Exam is finished."
     }
     showQuestion(questionsList[currentLevel])
 }
