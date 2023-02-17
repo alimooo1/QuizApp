@@ -12,14 +12,25 @@
     }
 
     div.answers {
-        min-height: 240px;
+        min-height: 265px;
+    }
+    
+    div.answer {
+        width: 85%;
     }
 }
 
 @media only screen and (max-width: 450px) {
     div.container {
-        padding: 2rem 0;
-        gap: 30px;
+        padding: 20px 0;
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 350) {
+    div.container {
+        padding: 10px 0;
+        gap: 10px;
     }
 }
 
@@ -48,6 +59,7 @@ body {
     justify-content: flex-start;
     padding: 5rem 0;
     gap: 70px;
+    overflow: hidden;
 }
 
 .container h3 {
