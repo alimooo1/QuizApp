@@ -1,6 +1,6 @@
 @media only screen and (max-width: 800px) {
     div.container {
-        width: 85%;
+        width: 90%;
     }
 
     div.answers {
@@ -9,6 +9,16 @@
 
     div.question {
         min-height: 120px;
+    }
+
+    div.answers {
+        min-height: 240px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    div.container {
+        padding: 3rem 0;
     }
 }
 
@@ -20,9 +30,11 @@
 
 body {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: rgb(86, 14, 71);
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .container {
