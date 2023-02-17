@@ -1,4 +1,8 @@
 @media only screen and (max-width: 800px) {
+    div.container {
+        width: 85%;
+    }
+
     div.answers {
         flex-direction: column;
     }
@@ -18,6 +22,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgb(86, 14, 71);
+    overflow: hidden;
 }
 
 .container {
@@ -145,7 +150,7 @@ body {
 }
 
 .new-question {
-    animation: newQuestion 1.5s 1s;
+    animation: newQuestion 1.5s;
 }
 
 @keyframes oldQuestion {

@@ -3,6 +3,7 @@ const questionLine = document.querySelector(".question")
 const answerBoxes = document.querySelectorAll(".answer")
 const results = document.querySelectorAll(".result .filler")
 const pageContent = document.querySelector(".answers")
+const questionBox = document.querySelector(".questionBox")
 let questionsList = await getQuestions()
 let currentLevel  = 0
 let answerIndex = null
@@ -36,6 +37,8 @@ const showQuestion = question => {
 }
 
 const checkAnswerHandler = (event) => {
+    questionBox.classList.remove("old-question")
+    questionBox.classList.remove("new-question")
     if (event.target.textContent === answerBoxes[answerIndex].textContent) {
         answerBoxes[answerIndex].classList.add("correct-answer")
         results[currentLevel].classList.add("correct-answer") 
@@ -46,15 +49,22 @@ const checkAnswerHandler = (event) => {
         results[currentLevel].classList.add("showed-result")
     }
     currentLevel++
+
+    setTimeout(()=>{
+        questionBox.classList.add("old-question")
+    },1300)
+
     setTimeout(()=>{
         if (currentLevel === 4) {
             pageContent.textContent = ""
             questionLine.textContent = "The Exam is finished."
+        } else {
+            event.target.classList.remove("wrong-answer")    
+            answerBoxes[answerIndex].classList.remove("correct-answer")
+            showQuestion(questionsList[currentLevel])
         }
-        event.target.classList.remove("wrong-answer")    
-        answerBoxes[answerIndex].classList.remove("correct-answer")
-        showQuestion(questionsList[currentLevel])
-    },1300)
+        questionBox.classList.add("new-question")
+    },2100)
 }
 
 answerBoxes.forEach(answer => {
