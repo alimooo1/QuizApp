@@ -16,9 +16,10 @@
     }
 }
 
-@media only screen and (max-width: 370px) {
+@media only screen and (max-width: 450px) {
     div.container {
-        padding: 3rem 0;
+        padding: 2rem 0;
+        gap: 30px;
     }
 }
 
