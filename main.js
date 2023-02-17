@@ -37,17 +37,24 @@ const showQuestion = question => {
 
 const checkAnswerHandler = (event) => {
     if (event.target.textContent === answerBoxes[answerIndex].textContent) {
+        answerBoxes[answerIndex].classList.add("correct-answer")
         results[currentLevel].classList.add("correct-answer") 
         results[currentLevel].classList.add("showed-result")
     } else {
+        answerBoxes[answerIndex].classList.toggle("correct-answer")
+        event.target.classList.toggle("wrong-answer")
         results[currentLevel].classList.add("showed-result")
     }
     currentLevel++
-    if (currentLevel === 4) {
-        pageContent.textContent = ""
-        questionLine.textContent = "The Exam is finished."
-    }
-    showQuestion(questionsList[currentLevel])
+    setTimeout(()=>{
+        if (currentLevel === 4) {
+            pageContent.textContent = ""
+            questionLine.textContent = "The Exam is finished."
+        }
+        event.target.classList.remove("wrong-answer")    
+        answerBoxes[answerIndex].classList.remove("correct-answer")
+        showQuestion(questionsList[currentLevel])
+    },1300)
 }
 
 answerBoxes.forEach(answer => {

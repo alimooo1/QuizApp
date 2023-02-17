@@ -28,7 +28,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 8rem 0;
+    padding: 5rem 0;
     gap: 70px;
 }
 
@@ -46,6 +46,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* margin-right: 1000px; */
+    margin-right: 0px;
 }
 
 .question {
@@ -86,6 +88,7 @@ body {
     font-weight: 400;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.418), 0 6px 20px 0 rgba(0, 0, 0, 0.347);
     text-shadow: 1px 1px 2.5px #af42a2;
+    transition: all 0.2s;
 }
 
 .answer:hover {
@@ -125,8 +128,32 @@ body {
 
 .correct-answer {
     background-color: rgb(48, 205, 56);
+    color: white;
+}
+
+.wrong-answer {
+    background-color: rgb(214, 36, 36);
+    color: white;
 }
 
 .two-answer {
     visibility: hidden;
+}
+
+.old-question {
+    animation: oldQuestion 1.5s;
+}
+
+.new-question {
+    animation: newQuestion 1.5s 1s;
+}
+
+@keyframes oldQuestion {
+    0% {margin-right: 0px;}
+    100% {margin-right: 3000px;}
+}
+
+@keyframes newQuestion {
+    0% {margin-left: 3000px;}
+    100% {margin-left: 0px;}
 }
