@@ -10,17 +10,20 @@ const pageContent = document.querySelector(".answers") as HTMLDivElement;
 const questionBox = document.querySelector(".questionBox") as HTMLDivElement;
 
 class QizzApp {
-  constructor(private _questionsList: QuestionsList[]) {}
+  private static _questionsList: QuestionsList[] = [];
+  private static _getQuestions = async () => {
+    return await getQuestions();
+  };
 
-  private _currentLevel = 0;
-  private _answerIndex = 0;
+  private static _currentLevel = 0;
+  private static _answerIndex = 0;
 
-  private _decode = (str: string) => {
+  private static _decode = (str: string) => {
     const txt = new DOMParser().parseFromString(str, "text/html");
     return txt.documentElement.textContent as string;
   };
 
-  private _showQuestion = (question: QuestionsList) => {
+  private static _showQuestion = (question: QuestionsList) => {
     let answersNumber = question.incorrect_answers.length;
     if (answersNumber === 1) {
       pageContent.children[2].classList.add("two-answer");
@@ -47,7 +50,7 @@ class QizzApp {
     }
   };
 
-  private _checkAnswerHandler = (event: MouseEvent) => {
+  private static _checkAnswerHandler = (event: MouseEvent) => {
     const currentElement = event.target as HTMLDivElement;
     questionBox.classList.remove("old-question");
     questionBox.classList.remove("new-question");
@@ -81,17 +84,17 @@ class QizzApp {
     }, 2100);
   };
 
-  private _setCheckAnswerHandler() {
+  private static _setCheckAnswerHandler() {
     answerBoxes.forEach((answer) => {
       answer.addEventListener("click", this._checkAnswerHandler);
     });
   }
 
-  Run() {
+  static async Run() {
+    this._questionsList = await this._getQuestions();
     this._setCheckAnswerHandler();
     this._showQuestion(this._questionsList[this._currentLevel]);
   }
 }
 
-const myQuiz = new QizzApp(await getQuestions());
-myQuiz.Run();
+QizzApp.Run();
