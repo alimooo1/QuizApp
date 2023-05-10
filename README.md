@@ -6,7 +6,7 @@ You will answer and app shows results.
 
 Test it with this link right now:
 
-https://alimooo1.github.io/QuizApp/
+https://alimooo1.github.io/QuizApp/src
 
 ## UPDATE!
 
